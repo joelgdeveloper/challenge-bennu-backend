@@ -1,42 +1,46 @@
 const { response, request } = require('express');
 
-const usersGet = (req = request, res = response) => {
+const User = require('../models/user');
+
+const usersGet = async (req = request, res = response) => {
+  total = await User.find();
 
   res.json({
     msg: 'get API - usersGet',
+    total
   });
 }
 
-const userGet = (req = request, res = response) => {
-  const { id } = req.params;
-
+const usersCount = async (req = request, res = response) => {
+  const total = await User.countDocuments();
   res.json({
-    msg: 'get API - userGet specific',
-    id
+    msg: 'get API - userGetCounts',
+    total
   });
 }
 
-const usersCount = (req = request, res = response) => {
+const usersPost = async (req, res = response) => {
+
+  const { name, username, email, address, phone, website, company } = req.body;
+
+  const user = new User({ name, username, email, address, phone, website, company });
+
+  await user.save();
 
   res.json({
-    msg: 'get API - userGetCounts'
-  });
-}
-
-const usersPost = (req, res = response) => {
-
-  const { nombre, edad } = req.body;
-
-  res.json({
-    msg: 'post API - usuariosPost',
-    nombre,
-    edad
+    msg: 'User creado con exito!!',
+    name,
+    username,
+    email,
+    address,
+    phone,
+    website,
+    company
   });
 }
 
 module.exports = {
   usersGet,
-  userGet,
   usersPost,
   usersCount
 }

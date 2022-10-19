@@ -1,20 +1,27 @@
 const { Router } = require('express');
+const { check } = require('express-validator');
+
+const { validarCampos } = require('../middlewares/validar-campos');
 
 const { usersGet,
-        userGet,
-        usersPost,
-        usersCount
-       } = require('../controllers/users');
+       usersPost,
+       usersCount
+      } = require('../controllers/users');
 
 const router = Router();
 
-router.get('/', usersGet );
+router.get('/', usersGet);
 
-router.get('/:id', userGet );
+router.get('/counts', usersCount);
 
-router.get('/counts', usersCount );
-
-router.post('/', usersPost );
+router.post('/', [
+       check('name', 'El nombre es obligatorio').not().isEmpty(),
+       check('username', 'El nombre es obligatorio').not().isEmpty(),
+       check('email', 'El email es obligatorio').not().isEmpty(),
+       check('phone', 'El telefono es obligatoria').not().isEmpty(),
+       check('website', 'El sitio web es obligatorio').not().isEmpty(),
+       validarCampos
+], usersPost);
 
 
 
