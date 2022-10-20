@@ -44,4 +44,9 @@ renombrar el archivo example.env a .env y agregar su cadena de conexion de mongo
         }
     }
 ```
-
+## GetApi
+![GetApi](https://github.com/joelgdeveloper/challenge-bennu-backend/blob/main/public/assets/get.PNG)
+## GetApiCounts
+![GetApi](https://github.com/joelgdeveloper/challenge-bennu-backend/blob/main/public/assets/getcounts.PNG)
+## GetPost
+![GetApi](https://github.com/joelgdeveloper/challenge-bennu-backend/blob/main/public/assets/post.PNG)
